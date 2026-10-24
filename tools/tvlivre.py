@@ -141,9 +141,10 @@ def cmd_install(args):
     # Same call ares-install makes. Without a TTY, luna-send-pub block-buffers
     # stdout and only flushes when it exits; in interactive mode it never exits
     # on its own, so let it run, then SIGINT it to get every reply at once.
+    # SIGINT flushes the replies but does not always end the process, hence the KILL.
     print(f"[*] Installing (waiting {args.wait}s for the TV)...")
     res = ssh(ip, f"/usr/bin/luna-send-pub -i luna://com.webos.appInstallService/dev/install '{payload}' & "
-                  f"P=$!; sleep {args.wait}; kill -INT $P; wait $P")
+                  f"P=$!; sleep {args.wait}; kill -INT $P; sleep 1; kill -KILL $P 2>/dev/null; wait $P")
     ssh(ip, f"rm -f '{remote}'")
     states = [json.loads(l).get("details", {}).get("state") for l in res.stdout.splitlines()
               if l.startswith("{") and '"details"' in l]

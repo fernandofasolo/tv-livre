@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
             --glass-focus-border: rgba(255, 255, 255, 0.95);
             --text-primary: #f5f5f7;
             --text-secondary: rgba(245, 245, 247, 0.65);
-            --accent: #0a84ff;
+            --accent: #1fc77e;
         }
 
         body.theme-day {
@@ -60,7 +60,7 @@
             width: 50%;
             height: 50%;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(10, 132, 255, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+            background: radial-gradient(circle, rgba(31, 199, 126, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
             filter: blur(60px);
             pointer-events: none;
             /* Only opacity/transform animate (compositor-only). The gradient color itself
@@ -98,17 +98,18 @@
             width: 34px;
             height: 34px;
             border-radius: 10px;
-            background: linear-gradient(135deg, #0a84ff, #0050c8);
+            background: linear-gradient(135deg, #1fc77e, #0e7a4b);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(10, 132, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(31, 199, 126, 0.4);
         }
 
         .brand-logo svg {
             width: 19px;
             height: 19px;
             fill: #ffffff;
+            color: #ffffff;
         }
 
         .brand-title {
@@ -421,8 +422,8 @@
 
         .picks-tab.active {
             color: var(--text-primary);
-            background: rgba(10, 132, 255, 0.22);
-            border-color: #0a84ff;
+            background: rgba(31, 199, 126, 0.22);
+            border-color: #1fc77e;
         }
 
         .picks-tab:hover,
@@ -597,8 +598,8 @@
         }
 
         .app-toggle-item.selected {
-            background: rgba(10, 132, 255, 0.22);
-            border-color: #0a84ff;
+            background: rgba(31, 199, 126, 0.22);
+            border-color: #1fc77e;
         }
 
         .app-toggle-item:hover,
@@ -847,6 +848,14 @@
             color: rgba(255, 255, 255, 0.82);
         }
 
+        .pick-poster .pick-logo {
+            display: block;
+            width: 70%;
+            height: 100%;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+
         .screensaver-date {
             font-size: 22px;
             font-weight: 400;
@@ -859,31 +868,31 @@
 </head>
 <body>
     <div class="ambient-glow" id="ambientGlow"></div>
-    <div class="toast-msg" id="toastMsg" role="status" aria-live="polite">Launching...</div>
+    <div class="toast-msg" id="toastMsg" role="status" aria-live="polite">Abrindo...</div>
 
     <div class="container">
         <!-- Header -->
         <header>
             <div class="brand-group">
                 <div class="brand-logo">
-                    <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+                    <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="11.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 20h7M12 16.5V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10.4 8.2v5.1l4.2-2.55z" fill="currentColor"/></svg>
                 </div>
                 <div class="brand-title">TV Livre</div>
-                <div class="tag-pill" id="themeBadge">60 FPS • Onboard</div>
+                <div class="tag-pill" id="themeBadge">Noite</div>
             </div>
             <div class="header-info">
-                <button class="header-btn nav-item" id="customizeBtn" data-tag="Personalize" data-title="Customize Shelf & Settings" data-desc="Choose which installed TV apps appear on your shelf, configure weather city, and TMDB key.">
-                    <span>⚙️ Customize</span>
+                <button class="header-btn nav-item" id="customizeBtn" data-tag="Personalizar" data-title="Prateleira e configurações" data-desc="Escolha os apps da prateleira, a cidade do clima, o tema e a chave do TMDB.">
+                    <span>⚙️ Personalizar</span>
                 </button>
-                <div class="weather-widget nav-item" id="weatherWidget" data-tag="Live Forecast" data-title="Local Weather & Sunset" data-desc="Live temperature and sky conditions powered by Open-Meteo.">
+                <div class="weather-widget nav-item" id="weatherWidget" data-tag="Previsão ao vivo" data-title="Clima e pôr do sol" data-desc="Temperatura e condições do céu agora, via Open-Meteo. OK para ver as próximas horas.">
                     <span id="weatherIcon">☀️</span>
                     <div>
-                        <div id="weatherText">Loading...</div>
-                        <div class="weather-sub" id="weatherSub">Auto-detecting</div>
+                        <div id="weatherText">Carregando...</div>
+                        <div class="weather-sub" id="weatherSub">Buscando clima</div>
                     </div>
                 </div>
                 <div class="clock-group">
-                    <div class="date" id="dateText">Mon, Oct 19</div>
+                    <div class="date" id="dateText">seg., 19 de out.</div>
                     <div class="clock" id="clockText">20:30</div>
                 </div>
             </div>
@@ -891,20 +900,20 @@
 
         <!-- Top Shelf (Hero Preview) -->
         <div class="hero-shelf">
-            <div class="hero-tag" id="heroTag">App Launcher</div>
-            <div class="hero-title" id="heroTitle">Clean & Ad-Free Home</div>
-            <div class="hero-desc" id="heroDesc">Navigate smoothly with Magic Remote D-Pad or pointer. Launch apps in 100ms with zero ads.</div>
+            <div class="hero-tag" id="heroTag">TV Livre</div>
+            <div class="hero-title" id="heroTitle">Sua TV, sem anúncios</div>
+            <div class="hero-desc" id="heroDesc">Navegue com as setas ou o ponteiro do Magic Remote. Seus apps abrem direto, sem propaganda no caminho.</div>
         </div>
 
         <!-- Glass Shelf: Apps -->
         <div class="shelf-wrapper">
             <div class="shelf-top-bar">
-                <div class="shelf-header">Favorite Apps</div>
-                <div class="shelf-hint" id="shelfCountHint" aria-live="polite">Instant Native Launch</div>
-                <button class="header-btn nav-item" id="reorderShelfBtn" data-title="Reorder tiles" data-desc="Rearrange your apps right here on the shelf.">Reorder</button>
+                <div class="shelf-header">Seus apps</div>
+                <div class="shelf-hint" id="shelfCountHint" aria-live="polite">Abertura direta</div>
+                <button class="header-btn nav-item" id="reorderShelfBtn" data-title="Reordenar" data-desc="Mude a ordem dos apps aqui mesmo na prateleira.">Reordenar</button>
                 <div class="shelf-edit-actions" id="shelfEditActions" hidden>
-                    <button class="header-btn nav-item" id="saveShelfOrder" data-title="Save tile order">Done</button>
-                    <button class="header-btn nav-item" id="cancelShelfOrder" data-title="Cancel reordering">Cancel</button>
+                    <button class="header-btn nav-item" id="saveShelfOrder" data-title="Salvar ordem">Concluir</button>
+                    <button class="header-btn nav-item" id="cancelShelfOrder" data-title="Cancelar">Cancelar</button>
                 </div>
             </div>
             <div class="shelf-grid" id="appsGrid"></div>
@@ -913,12 +922,12 @@
         <!-- Trending Picks Row -->
         <div class="picks-section">
             <div class="picks-top-bar">
-                <div class="picks-header">Trending This Week</div>
+                <div class="picks-header">Em alta nos seus streamings</div>
                 <div class="picks-tabs">
-                    <button class="picks-tab nav-item active" id="tabMovies" data-tag="Trending" data-title="Movies" data-desc="Switch the row below to this week's trending movies.">Movies</button>
-                    <button class="picks-tab nav-item" id="tabShows" data-tag="Trending" data-title="Shows" data-desc="Switch the row below to this week's trending TV shows.">Shows</button>
+                    <button class="picks-tab nav-item active" id="tabMovies" data-tag="Em alta" data-title="Filmes" data-desc="Mostra os filmes em alta da semana e onde assistir no Brasil.">Filmes</button>
+                    <button class="picks-tab nav-item" id="tabShows" data-tag="Em alta" data-title="Séries" data-desc="Mostra as séries em alta da semana e onde assistir no Brasil.">Séries</button>
                 </div>
-                <div class="picks-source-badge" id="picksSourceBadge">Live Feed</div>
+                <div class="picks-source-badge" id="picksSourceBadge">Ao vivo</div>
             </div>
             <div class="picks-grid" id="picksGrid"></div>
         </div>
@@ -928,49 +937,49 @@
     <div class="modal-backdrop" id="settingsModal">
         <div class="modal-box">
             <div class="modal-header">
-                <div class="modal-title">Customize TV Livre</div>
-                <div style="font-size: 13px; color: var(--text-secondary);">Press BACK or ESC to close</div>
+                <div class="modal-title">Personalizar o TV Livre</div>
+                <div style="font-size: 13px; color: var(--text-secondary);">VOLTAR ou ESC para fechar</div>
             </div>
 
             <div>
-                <div class="modal-section-title">1. Select Apps for Glass Shelf (Click to Toggle)</div>
+                <div class="modal-section-title">1. Apps da prateleira (OK para marcar, até 8)</div>
                 <div class="app-selector-grid" id="appSelectorGrid"></div>
 
             </div>
 
             <div>
-                <div class="modal-section-title">2. HDMI Devices</div>
-                <p style="color: var(--text-secondary); margin: 0 0 12px;">Press a port to cycle its device. Save &amp; Apply to keep your choices.</p>
+                <div class="modal-section-title">2. Aparelhos HDMI</div>
+                <p style="color: var(--text-secondary); margin: 0 0 12px;">Aperte OK numa porta para trocar o aparelho. Salve para manter.</p>
                 <div class="hdmi-options" id="hdmiOptions"></div>
             </div>
 
             <div>
-                <div class="modal-section-title">3. Weather, Theme & TMDB API</div>
+                <div class="modal-section-title">3. Clima, tema e TMDB</div>
                 <div class="settings-row">
                     <div class="field-group">
-                        <label>City Name (or leave Auto)</label>
-                        <input type="text" class="field-input modal-nav" id="cfgCity" placeholder="e.g. Sao Paulo, Lisbon, NYC">
+                        <label>Cidade (vazio = São Paulo)</label>
+                        <input type="text" class="field-input modal-nav" id="cfgCity" placeholder="ex.: Curitiba, Rio de Janeiro">
                     </div>
                     <div class="field-group">
-                        <label>Theme Mode</label>
+                        <label>Tema</label>
                         <select class="field-input modal-nav" id="cfgTheme">
-                            <option value="auto">Auto (Follows Sunset)</option>
-                            <option value="night">Deep Midnight (Default)</option>
-                            <option value="oled">Pure OLED Black</option>
-                            <option value="day">Daylight Blue</option>
+                            <option value="auto">Automático (segue o sol)</option>
+                            <option value="night">Noite</option>
+                            <option value="oled">Preto total</option>
+                            <option value="day">Dia</option>
                         </select>
                     </div>
                     <div class="field-group">
-                        <label>TMDB API Key (Optional)</label>
-                        <input type="text" class="field-input modal-nav" id="cfgTmdbKey" placeholder="Optional for TMDB Trending">
+                        <label>Chave da API do TMDB (para "onde assistir")</label>
+                        <input type="text" class="field-input modal-nav" id="cfgTmdbKey" placeholder="Grátis em themoviedb.org/settings/api">
                     </div>
                 </div>
             </div>
 
             <div class="modal-actions">
-                <button class="btn-secondary modal-nav" id="resetDefaultBtn">Reset Defaults</button>
-                <button class="btn-secondary modal-nav" id="closeModalBtn">Cancel</button>
-                <button class="btn-primary modal-nav" id="saveModalBtn">Save & Apply</button>
+                <button class="btn-secondary modal-nav" id="resetDefaultBtn">Restaurar padrão</button>
+                <button class="btn-secondary modal-nav" id="closeModalBtn">Cancelar</button>
+                <button class="btn-primary modal-nav" id="saveModalBtn">Salvar</button>
             </div>
         </div>
     </div>
@@ -979,20 +988,20 @@
     <div class="drawer-backdrop" id="weatherDrawer">
         <div class="drawer-panel">
             <div class="modal-header">
-                <div class="modal-title">Weather & Sun</div>
-                <div style="font-size: 13px; color: var(--text-secondary);">Press BACK or ESC to close</div>
+                <div class="modal-title">Clima e sol</div>
+                <div style="font-size: 13px; color: var(--text-secondary);">VOLTAR ou ESC para fechar</div>
             </div>
 
             <div class="drawer-current">
                 <span class="drawer-current-icon" id="drawerIcon">☀️</span>
                 <div>
                     <div class="drawer-current-temp" id="drawerTemp">--°C</div>
-                    <div class="drawer-current-sub" id="drawerCityLabel">Loading...</div>
+                    <div class="drawer-current-sub" id="drawerCityLabel">Carregando...</div>
                 </div>
             </div>
 
             <div>
-                <div class="modal-section-title">Next Hours</div>
+                <div class="modal-section-title">Próximas horas</div>
                 <div class="drawer-hourly" id="drawerHourly"></div>
             </div>
 
@@ -1000,21 +1009,21 @@
                 <div class="drawer-sun-item">
                     <span>🌅</span>
                     <div>
-                        <div class="drawer-sun-label">Sunrise</div>
+                        <div class="drawer-sun-label">Nascer do sol</div>
                         <div class="drawer-sun-value" id="drawerSunrise">--:--</div>
                     </div>
                 </div>
                 <div class="drawer-sun-item">
                     <span>🌇</span>
                     <div>
-                        <div class="drawer-sun-label">Sunset</div>
+                        <div class="drawer-sun-label">Pôr do sol</div>
                         <div class="drawer-sun-value" id="drawerSunset">--:--</div>
                     </div>
                 </div>
             </div>
 
             <div class="modal-actions">
-                <button class="btn-secondary" id="closeDrawerBtn">Close</button>
+                <button class="btn-secondary" id="closeDrawerBtn">Fechar</button>
             </div>
         </div>
     </div>
@@ -1023,38 +1032,38 @@
     <div class="screensaver" id="screensaverOverlay">
         <div class="screensaver-clock-wrap" id="screensaverClockWrap">
             <div class="screensaver-clock" id="screensaverClock">20:30</div>
-            <div class="screensaver-date" id="screensaverDate">Mon, Oct 19</div>
+            <div class="screensaver-date" id="screensaverDate">seg., 19 de out.</div>
         </div>
     </div>
 
     <script>
         // --- Default Catalog of Apps ---
         var DEFAULT_CATALOG = [
-            { id: 'youtube.leanback.v4', title: 'YouTube', tag: 'Streaming', desc: 'Watch 4K videos, live streams, music, and coding radio.', color: '#ff0000', badge: 'YT', bg: 'linear-gradient(135deg, #ff0000, #b00000)' },
-            { id: 'netflix', title: 'Netflix', tag: 'Movies & Series', desc: 'Unlimited movies, TV shows, and originals in 4K Dolby Vision.', color: '#e50914', badge: 'N', bg: 'linear-gradient(135deg, #1f1f1f, #080808)' },
-            { id: 'cdp-30', title: 'Plex', tag: 'Personal Media', desc: 'Stream your personal home cinema, movies, and music library.', color: '#e5a00d', badge: '>', bg: 'linear-gradient(135deg, #e5a00d, #9e6d00)' },
-            { id: 'com.crunchyroll.webapp', title: 'Crunchyroll', tag: 'Anime', desc: 'Stream the world\'s largest anime library and simulcasts.', color: '#f47521', badge: 'CR', bg: 'linear-gradient(135deg, #f47521, #c4570d)' },
-            { id: 'globoplaywebos', title: 'Globoplay', tag: 'Brazil Streaming', desc: 'Original series, live channels, sports, and cinema.', color: '#fb003f', badge: 'globo', bg: 'linear-gradient(135deg, #fb003f, #aa002a)' },
-            { id: 'com.webos.app.hdmi1', title: 'HDMI 1', tag: 'External Input', desc: 'Switch directly to HDMI 1 (PC / Gaming Console).', color: '#0a84ff', badge: 'HDMI 1', bg: 'linear-gradient(135deg, #0a84ff, #004ec4)' },
-            { id: 'com.webos.app.hdmi2', title: 'HDMI 2', tag: 'External Input', desc: 'Switch directly to HDMI 2 input.', color: '#00c7be', badge: 'HDMI 2', bg: 'linear-gradient(135deg, #00c7be, #007a74)' },
-            { id: 'com.webos.app.hdmi3', title: 'HDMI 3', tag: 'External Input', desc: 'Switch directly to HDMI 3 input.', color: '#0a84ff', badge: 'HDMI 3', bg: 'linear-gradient(135deg, #0a84ff, #004ec4)' },
-            { id: 'com.webos.app.hdmi4', title: 'HDMI 4', tag: 'External Input', desc: 'Switch directly to HDMI 4 input.', color: '#0a84ff', badge: 'HDMI 4', bg: 'linear-gradient(135deg, #0a84ff, #004ec4)' },
-            { id: 'com.webos.app.browser', title: 'Browser', tag: 'Internet', desc: 'Full-screen web browsing on your LG Smart TV.', color: '#5856d6', badge: 'WEB', bg: 'linear-gradient(135deg, #5856d6, #3634a3)' },
-            { id: 'org.webosbrew.hbchannel', title: 'Homebrew', tag: 'System', desc: 'Homebrew Channel app store, YouTube AdFree, and system tweaks.', color: '#cf0652', badge: 'HB', bg: 'linear-gradient(135deg, #cf0652, #8b0034)' },
-            { id: 'com.webos.app.mediadiscovery', title: 'Media Player', tag: 'Local Media', desc: 'Play photos, videos, and music from USB or DLNA servers.', color: '#7e56b1', badge: 'USB', bg: 'linear-gradient(135deg, #7e56b1, #4f3278)' },
-            { id: 'amazon', title: 'Prime Video', tag: 'Movies & Shows', desc: 'Watch Amazon Originals, popular movies, and live sports.', color: '#00a8e1', badge: 'prime', bg: 'linear-gradient(135deg, #00a8e1, #00628a)' },
-            { id: 'com.disney.disneyplus-prod', title: 'Disney+', tag: 'Streaming', desc: 'Disney, Pixar, Marvel, Star Wars, and National Geographic.', color: '#113ccf', badge: 'D+', bg: 'linear-gradient(135deg, #113ccf, #071961)' },
-            { id: 'spotify-beehive', title: 'Spotify', tag: 'Music', desc: 'Listen to millions of songs, albums, and podcasts on your TV.', color: '#1db954', badge: 'SP', bg: 'linear-gradient(135deg, #1db954, #0f7833)' }
+            { id: 'netflix', title: 'Netflix', tag: 'Filmes e séries', desc: 'Filmes, séries e produções originais.', color: '#e50914', badge: 'N', bg: 'linear-gradient(135deg, #1f1f1f, #080808)' },
+            { id: 'amazon', title: 'Prime Video', tag: 'Filmes e séries', desc: 'Originais Amazon, filmes e esportes ao vivo.', color: '#00a8e1', badge: 'prime', bg: 'linear-gradient(135deg, #00a8e1, #00628a)' },
+            { id: 'com.disney.disneyplus-prod', title: 'Disney+', tag: 'Filmes e séries', desc: 'Disney, Pixar, Marvel, Star Wars e National Geographic.', color: '#113ccf', badge: 'D+', bg: 'linear-gradient(135deg, #113ccf, #071961)' },
+            { id: 'youtube.leanback.v4', title: 'YouTube', tag: 'Vídeos', desc: 'Vídeos, ao vivo e música.', color: '#ff0000', badge: 'YT', bg: 'linear-gradient(135deg, #ff0000, #b00000)' },
+            { id: 'globoplaywebos', title: 'Globoplay', tag: 'Streaming nacional', desc: 'Novelas, séries originais, canais ao vivo e esportes.', color: '#fb003f', badge: 'globo', bg: 'linear-gradient(135deg, #fb003f, #aa002a)' },
+            { id: 'spotify-beehive', title: 'Spotify', tag: 'Música', desc: 'Músicas, álbuns e podcasts na TV.', color: '#1db954', badge: 'SP', bg: 'linear-gradient(135deg, #1db954, #0f7833)' },
+            { id: 'com.webos.app.hdmi1', title: 'HDMI 1', tag: 'Entrada externa', desc: 'Muda direto para a entrada HDMI 1.', color: '#1fc77e', badge: 'HDMI 1', bg: 'linear-gradient(135deg, #1fc77e, #0e7a4b)' },
+            { id: 'com.webos.app.hdmi2', title: 'HDMI 2', tag: 'Entrada externa', desc: 'Muda direto para a entrada HDMI 2.', color: '#00c7be', badge: 'HDMI 2', bg: 'linear-gradient(135deg, #00c7be, #007a74)' },
+            { id: 'com.webos.app.hdmi3', title: 'HDMI 3', tag: 'Entrada externa', desc: 'Muda direto para a entrada HDMI 3.', color: '#1fc77e', badge: 'HDMI 3', bg: 'linear-gradient(135deg, #1fc77e, #0e7a4b)' },
+            { id: 'com.webos.app.hdmi4', title: 'HDMI 4', tag: 'Entrada externa', desc: 'Muda direto para a entrada HDMI 4.', color: '#1fc77e', badge: 'HDMI 4', bg: 'linear-gradient(135deg, #1fc77e, #0e7a4b)' },
+            { id: 'com.webos.app.browser', title: 'Navegador', tag: 'Internet', desc: 'Navegador de internet em tela cheia.', color: '#5856d6', badge: 'WEB', bg: 'linear-gradient(135deg, #5856d6, #3634a3)' },
+            { id: 'com.webos.app.mediadiscovery', title: 'Mídia (USB)', tag: 'Arquivos', desc: 'Fotos, vídeos e músicas do pendrive ou da rede (DLNA).', color: '#7e56b1', badge: 'USB', bg: 'linear-gradient(135deg, #7e56b1, #4f3278)' }
         ];
+        // Catalog entries that only make sense if the app is actually on this TV.
+        // Inputs and built-in apps always exist, so they are never hidden.
+        function isAlwaysAvailable(app) { return isHDMI(app) || /^com\.webos\.app\./.test(app.id); }
 
         // Device artwork is bundled inline so HDMI tiles also work offline.
         var DEVICE_PRESETS = [
-            { key: 'default', title: '', color: '#0a84ff', shape: 'input' },
+            { key: 'default', title: '', color: '#1fc77e', shape: 'input' },
             { key: 'ps5', title: 'PS5', color: '#123ca6', logo: 'playstation5' },
             { key: 'ps4', title: 'PS4', color: '#173070', logo: 'playstation4' },
             { key: 'xbox', title: 'Xbox', color: '#107c10', logo: 'xbox' },
             { key: 'switch', title: 'Nintendo Switch', color: '#c82131', logo: 'nintendoswitch' },
-            { key: 'pc', title: 'Gaming PC', color: '#633ca6', shape: 'pc' }
+            { key: 'pc', title: 'PC Gamer', color: '#633ca6', shape: 'pc' }
         ];
         function readDeviceChoices() {
             try {
@@ -1084,6 +1093,29 @@
             'com.disney.disneyplus-prod': 'disneyplus',
             'spotify-beehive': 'spotify'
         };
+
+        // TMDB watch-provider ids (region BR) -> webOS app ids. Providers not listed
+        // here are matched by name against the apps discovered on the TV.
+        var PROVIDER_APPS = {
+            8: 'netflix', 1796: 'netflix',
+            9: 'amazon', 119: 'amazon', 10: 'amazon',
+            337: 'com.disney.disneyplus-prod',
+            307: 'globoplaywebos',
+            283: 'com.crunchyroll.webapp',
+            192: 'youtube.leanback.v4'
+        };
+        function normName(name) { return String(name || '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+        function appForProvider(provider) {
+            var id = PROVIDER_APPS[provider.provider_id];
+            var app = id && arrFind(state.catalog, function(c) { return c.id === id; });
+            if (app) return isInstalled(app) ? app : undefined;
+            var want = normName(provider.provider_name).replace(/(amazonchannel|standardwithads|basicwithads|withads)$/, '');
+            if (want.length < 3) return undefined;
+            return arrFind(state.catalog, function(c) {
+                var have = normName(c.title);
+                return !isHDMI(c) && isInstalled(c) && have.length >= 3 && (have.indexOf(want) === 0 || want.indexOf(have) === 0);
+            });
+        }
         function addTileImage(container, url, branded) {
             var img = document.createElement('img');
             img.alt = '';
@@ -1104,32 +1136,30 @@
             return ''; // Unresolvable paths use the readable tile fallback.
         }
 
-        // Defaults favor the streaming apps with the broadest global install base
-        // (YouTube/Netflix/Prime/Disney+) over niche regional or personal-media apps
-        // like Plex or Globoplay, which stay one tap away in Customize for anyone who uses them.
+        // Defaults: the big three subscriptions plus YouTube and the first two inputs.
+        // Everything else installed on the TV is one tap away in Personalizar.
         var DEFAULT_FAVORITES = [
-            'youtube.leanback.v4',
             'netflix',
             'amazon',
             'com.disney.disneyplus-prod',
-            'com.crunchyroll.webapp',
+            'youtube.leanback.v4',
             'com.webos.app.hdmi1',
-            'com.webos.app.browser',
-            'org.webosbrew.hbchannel'
+            'com.webos.app.hdmi2'
         ];
 
+        // Shown without a TMDB key: cards that open each service's own catalog.
         var FALLBACK_MOVIES = [
-            { title: 'Dune: Part Two', badge: 'Sci-Fi • 8.8★', service: 'Watch on Max / Netflix', app: 'netflix', desc: 'Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators.', poster: 'https://image.tmdb.org/t/p/w300/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg', color: '#e5a00d' },
-            { title: 'Oppenheimer', badge: 'Drama • 8.3★', service: 'Watch on Prime Video', app: 'amazon', desc: 'The story of American scientist J. Robert Oppenheimer and his role in developing the atomic bomb.', poster: '', color: '#00a8e1' },
-            { title: 'Spider-Man: Across the Spider-Verse', badge: 'Animation • 8.6★', service: 'Watch on Netflix', app: 'netflix', desc: 'Miles Morales catapults across the Multiverse to team up with Gwen Stacy and a new crew of Spider-People.', poster: '', color: '#5856d6' },
-            { title: 'Barbie', badge: 'Comedy • 7.0★', service: 'Watch on Max', app: 'netflix', desc: 'Barbie and Ken venture from Barbie Land to the real world in search of true happiness.', poster: '', color: '#ff375f' }
+            { title: 'Filmes na Netflix', badge: 'Atalho', service: 'Abrir a Netflix', app: 'netflix', desc: 'Adicione uma chave gratuita do TMDB em Personalizar para ver os filmes em alta e onde assistir.', poster: '', color: '#e50914' },
+            { title: 'Filmes no Prime Video', badge: 'Atalho', service: 'Abrir o Prime Video', app: 'amazon', desc: 'Adicione uma chave gratuita do TMDB em Personalizar para ver os filmes em alta e onde assistir.', poster: '', color: '#00a8e1' },
+            { title: 'Filmes no Disney+', badge: 'Atalho', service: 'Abrir o Disney+', app: 'com.disney.disneyplus-prod', desc: 'Adicione uma chave gratuita do TMDB em Personalizar para ver os filmes em alta e onde assistir.', poster: '', color: '#113ccf' },
+            { title: 'Trailers no YouTube', badge: 'Atalho', service: 'Abrir o YouTube', app: 'youtube.leanback.v4', desc: 'Trailers e lançamentos da semana.', poster: '', color: '#ff0000' }
         ];
 
         var FALLBACK_SHOWS = [
-            { title: 'Severance', badge: 'Thriller • 8.7★', service: 'Trending Series', app: 'netflix', desc: 'Mark leads a team of office workers whose memories have been surgically divided between work and personal lives.', poster: 'https://image.tmdb.org/t/p/w300/e9Lra4Wv77L84a0d8lEwB47zYqS.jpg', color: '#0a84ff' },
-            { title: 'Demon Slayer: Infinity', badge: 'Anime • 8.9★', service: 'Watch on Crunchyroll', app: 'com.crunchyroll.webapp', desc: 'Tanjiro and the Hashira face the Upper Rank demons in the final stronghold.', poster: 'https://image.tmdb.org/t/p/w300/xUfRZu2mi8jH6SzQEJGP6tjBuYj.jpg', color: '#f47521' },
-            { title: 'The Last of Us', badge: 'Drama • 8.8★', service: 'Watch on Max', app: 'netflix', desc: 'Joel and Ellie navigate a brutal, infected America in search of a cure.', poster: '', color: '#e5a00d' },
-            { title: 'Stranger Things', badge: 'Sci-Fi • 8.6★', service: 'Watch on Netflix', app: 'netflix', desc: 'A group of kids uncover supernatural mysteries in the small town of Hawkins, Indiana.', poster: '', color: '#ff0000' }
+            { title: 'Séries na Netflix', badge: 'Atalho', service: 'Abrir a Netflix', app: 'netflix', desc: 'Adicione uma chave gratuita do TMDB em Personalizar para ver as séries em alta e onde assistir.', poster: '', color: '#e50914' },
+            { title: 'Séries no Prime Video', badge: 'Atalho', service: 'Abrir o Prime Video', app: 'amazon', desc: 'Adicione uma chave gratuita do TMDB em Personalizar para ver as séries em alta e onde assistir.', poster: '', color: '#00a8e1' },
+            { title: 'Séries no Disney+', badge: 'Atalho', service: 'Abrir o Disney+', app: 'com.disney.disneyplus-prod', desc: 'Adicione uma chave gratuita do TMDB em Personalizar para ver as séries em alta e onde assistir.', poster: '', color: '#113ccf' },
+            { title: 'Globoplay', badge: 'Atalho', service: 'Abrir o Globoplay', app: 'globoplaywebos', desc: 'Novelas, séries nacionais e canais ao vivo.', poster: '', color: '#fb003f' }
         ];
 
         // --- Persistent State ---
@@ -1142,6 +1172,7 @@
             theme: localStorage.getItem('fmtv_theme') || 'auto',
             tmdbKey: localStorage.getItem('fmtv_tmdb_key') || '',
             catalog: DEFAULT_CATALOG.slice(),
+            installed: null, // appId -> true once listLaunchPoints answers
             picksTab: 'movies',
             hourlyForecast: [],
             sunrise: '',
@@ -1191,7 +1222,7 @@
             document.getElementById('clockText').textContent = timeStr;
 
             var opts = { weekday: 'short', month: 'short', day: 'numeric' };
-            var dateStr = now.toLocaleDateString('en-US', opts);
+            var dateStr = now.toLocaleDateString('pt-BR', opts);
             document.getElementById('dateText').textContent = dateStr;
 
             document.getElementById('screensaverClock').textContent = timeStr;
@@ -1215,31 +1246,31 @@
             var badge = document.getElementById('themeBadge');
             if (state.theme === 'oled') {
                 document.body.classList.add('theme-oled');
-                badge.textContent = 'OLED Zero • 60 FPS';
+                badge.textContent = 'Preto total';
             } else if (state.theme === 'day') {
                 document.body.classList.add('theme-day');
-                badge.textContent = 'Daylight • 60 FPS';
+                badge.textContent = 'Dia';
             } else if (state.theme === 'auto') {
                 if (state.isSunset) {
                     document.body.classList.add('theme-sunset');
-                    badge.textContent = 'Sunset • 60 FPS';
+                    badge.textContent = 'Pôr do sol';
                 } else if (!state.isNight) {
                     document.body.classList.add('theme-day');
-                    badge.textContent = 'Daylight • 60 FPS';
+                    badge.textContent = 'Dia';
                 } else {
-                    badge.textContent = 'Night • 60 FPS';
+                    badge.textContent = 'Noite';
                 }
             } else {
-                badge.textContent = '60 FPS • Onboard';
+                badge.textContent = 'Noite';
             }
         }
 
         // --- Live Weather & Sunset (Open-Meteo) ---
         var WMO_CODES = {
-            0: ['☀️', 'Clear Sky'], 1: ['🌤️', 'Mostly Clear'], 2: ['⛅', 'Partly Cloudy'],
-            3: ['☁️', 'Overcast'], 45: ['🌫️', 'Foggy'], 51: ['🌦️', 'Light Drizzle'],
-            61: ['🌧️', 'Rain'], 63: ['🌧️', 'Moderate Rain'], 71: ['❄️', 'Snow'],
-            80: ['🌦️', 'Rain Showers'], 95: ['⛈️', 'Thunderstorm']
+            0: ['☀️', 'Céu limpo'], 1: ['🌤️', 'Poucas nuvens'], 2: ['⛅', 'Parcialmente nublado'],
+            3: ['☁️', 'Nublado'], 45: ['🌫️', 'Neblina'], 51: ['🌦️', 'Garoa'],
+            61: ['🌧️', 'Chuva'], 63: ['🌧️', 'Chuva moderada'], 71: ['❄️', 'Neve'],
+            80: ['🌦️', 'Pancadas de chuva'], 95: ['⛈️', 'Tempestade']
         };
 
         // Written as .then() chains (no async/await) and guarded against a
@@ -1248,8 +1279,8 @@
         // synchronously and abort the rest of the boot sequence below it.
         function fetchWeather() {
             if (typeof fetch !== 'function') {
-                document.getElementById('weatherText').textContent = '22°C • Clear';
-                document.getElementById('weatherSub').textContent = state.city || 'Offline Mode';
+                document.getElementById('weatherText').textContent = '--°C';
+                document.getElementById('weatherSub').textContent = state.city || 'Sem conexão';
                 return;
             }
 
@@ -1300,7 +1331,7 @@
                         var temp = Math.round(data.current.temperature_2m);
                         var code = data.current.weather_code;
                         var isDay = data.current.is_day === 1;
-                        var wmo = WMO_CODES[code] || ['⛅', 'Fair'];
+                        var wmo = WMO_CODES[code] || ['⛅', 'Tempo firme'];
 
                         document.getElementById('weatherIcon').textContent = isDay ? wmo[0] : '🌙';
                         document.getElementById('weatherText').textContent = temp + '°C • ' + wmo[1];
@@ -1312,7 +1343,7 @@
                             }
                             if (data.daily.sunset && data.daily.sunset[0]) {
                                 state.sunset = data.daily.sunset[0].split('T')[1];
-                                sunsetStr = ' • Sunset ' + state.sunset;
+                                sunsetStr = ' • Pôr do sol ' + state.sunset;
                                 var sunsetHour = parseInt(state.sunset.split(':')[0], 10);
                                 state.isSunset = Math.abs(localNow.getUTCHours() - sunsetHour) <= 1;
                             }
@@ -1340,12 +1371,41 @@
                     renderDrawerForecast();
                 })
                 .catch(function(err) {
-                    document.getElementById('weatherText').textContent = '22°C • Clear';
-                    document.getElementById('weatherSub').textContent = state.city || 'Offline Mode';
+                    document.getElementById('weatherText').textContent = '--°C';
+                    document.getElementById('weatherSub').textContent = state.city || 'Sem conexão';
                 });
         }
 
-        // --- Live Trending Picks (TMDB + Live TVMaze Zero-Key Feed), split by Movies/Shows tab ---
+        // Turns a TMDB trending item + its BR watch providers into a pick card.
+        // rank: 0 = on the user's shelf, 1 = installed app, 2 = other streaming, 3 = rent/buy or none.
+        function pickFromTmdb(item, region, tab, order) {
+            var flat = (region && region.flatrate) || [];
+            var mine = null;
+            for (var i = 0; i < flat.length && !mine; i++) {
+                var app = appForProvider(flat[i]);
+                if (app) mine = app;
+            }
+            var rank = mine ? (state.favorites.indexOf(mine.id) !== -1 ? 0 : 1) : (flat.length ? 2 : 3);
+            var service;
+            if (mine) service = '▶ ' + mine.title;
+            else if (flat.length) service = 'Em ' + flat[0].provider_name + ' (app não instalado)';
+            else if (region && (region.rent || region.buy)) service = 'Só aluguel ou compra';
+            else service = 'Sem streaming no Brasil';
+            var score = item.vote_average ? item.vote_average.toFixed(1) + '★' : 'Novo';
+            return {
+                title: item.title || item.name || 'Em alta',
+                badge: (tab === 'shows' ? 'Série' : 'Filme') + ' • ' + score,
+                service: service,
+                app: mine ? mine.id : null,
+                desc: item.overview || 'Sem sinopse em português.',
+                poster: item.poster_path ? 'https://image.tmdb.org/t/p/w300' + item.poster_path : '',
+                color: mine ? mine.color : '#1fc77e',
+                rank: rank,
+                order: order
+            };
+        }
+
+        // --- Trending Picks (TMDB with watch providers, TVMaze zero-key feed), split by Movies/Shows tab ---
         function fetchTrendingPicks() {
             var badge = document.getElementById('picksSourceBadge');
             var tab = state.picksTab;
@@ -1353,7 +1413,7 @@
 
             function showCurated() {
                 if (tab !== state.picksTab) return;
-                badge.textContent = 'Curated Picks';
+                badge.textContent = 'Atalhos';
                 renderPicks(tab === 'shows' ? FALLBACK_SHOWS : FALLBACK_MOVIES);
             }
 
@@ -1362,39 +1422,43 @@
                 return;
             }
 
-            // 1. If user provided a TMDB API Key, fetch live from TMDB for the active tab
+            // 1. With a TMDB key: this week's trending titles in pt-BR, each checked for
+            //    where it streams in Brazil. Titles on the user's own apps come first.
             var tmdbPromise;
             if (state.tmdbKey && state.tmdbKey.trim().length > 8) {
                 var key = state.tmdbKey.trim();
-                var headers = key.length > 40 ? { 'Authorization': 'Bearer ' + key } : {};
-                var url = key.length > 40
-                    ? 'https://api.themoviedb.org/3/trending/' + tmdbMediaPath + '/week?language=en-US'
-                    : 'https://api.themoviedb.org/3/trending/' + tmdbMediaPath + '/week?api_key=' + encodeURIComponent(key);
+                var bearer = key.length > 40; // v4 read token vs v3 api_key
+                var tmdb = function(path) {
+                    var url = 'https://api.themoviedb.org/3' + path +
+                        (bearer ? '' : (path.indexOf('?') === -1 ? '?' : '&') + 'api_key=' + encodeURIComponent(key));
+                    return fetch(url, { headers: bearer ? { 'Authorization': 'Bearer ' + key } : {} })
+                        .then(function(res) {
+                            if (!res.ok) throw new Error('TMDB ' + res.status);
+                            return res.json();
+                        });
+                };
 
-                tmdbPromise = fetch(url, { headers: headers })
-                    .then(function(res) { return res.json(); })
+                tmdbPromise = tmdb('/trending/' + tmdbMediaPath + '/week?language=pt-BR')
                     .then(function(data) {
-                        if (data.results && data.results.length >= 4 && tab === state.picksTab) {
-                            var items = data.results.slice(0, 4).map(function(item) {
-                                var title = item.title || item.name || 'Trending';
-                                var score = item.vote_average ? item.vote_average.toFixed(1) + '★' : 'Hot';
-                                return {
-                                    title: title,
-                                    badge: (tab === 'shows' ? 'Series' : 'Movie') + ' • ' + score,
-                                    service: 'TMDB Trending',
-                                    app: 'netflix',
-                                    desc: item.overview || 'Trending worldwide this week.',
-                                    poster: item.poster_path ? 'https://image.tmdb.org/t/p/w300' + item.poster_path : '',
-                                    color: '#0a84ff'
-                                };
-                            });
-                            badge.textContent = 'TMDB Live';
-                            renderPicks(items);
+                        if (!data.results || data.results.length < 4 || tab !== state.picksTab) return false;
+                        var top = data.results.slice(0, 12);
+                        return Promise.all(top.map(function(item) {
+                            return tmdb('/' + tmdbMediaPath + '/' + item.id + '/watch/providers')
+                                .then(function(p) { return (p.results && p.results.BR) || null; })
+                                .catch(function() { return null; });
+                        })).then(function(regions) {
+                            if (tab !== state.picksTab) return false;
+                            var cards = top.map(function(item, i) { return pickFromTmdb(item, regions[i], tab, i); });
+                            cards.sort(function(a, b) { return a.rank - b.rank || a.order - b.order; });
+                            badge.textContent = 'TMDB • Brasil';
+                            renderPicks(cards.slice(0, 4));
                             return true;
-                        }
-                        return false;
+                        });
                     })
-                    .catch(function() { return false; });
+                    .catch(function() {
+                        if (tab === state.picksTab) showToast('TMDB não respondeu. Confira a chave em Personalizar.', 5000);
+                        return false;
+                    });
             } else {
                 tmdbPromise = Promise.resolve(false);
             }
@@ -1416,20 +1480,20 @@
                                         .slice(0, 4)
                                         .map(function(s) {
                                             var cleanSummary = (s.summary || '').replace(/<[^>]*>/g, '');
-                                            var genre = (s.genres && s.genres[0]) || 'Series';
+                                            var genre = (s.genres && s.genres[0]) || 'Série';
                                             var network = (s.network && s.network.name) || (s.webChannel && s.webChannel.name) || 'Streaming';
                                             return {
                                                 title: s.name,
                                                 badge: genre + ' • ' + s.rating.average + '★',
-                                                service: 'Watch on ' + network,
-                                                app: 'netflix',
-                                                desc: cleanSummary || 'Critically acclaimed trending series.',
+                                                service: 'Em ' + network,
+                                                app: null,
+                                                desc: cleanSummary || 'Série bem avaliada.',
                                                 poster: s.image.medium,
-                                                color: '#0a84ff'
+                                                color: '#1fc77e'
                                             };
                                         });
                                     if (topShows.length === 4) {
-                                        badge.textContent = 'Live Popular Feed';
+                                        badge.textContent = 'TVMaze';
                                         renderPicks(topShows);
                                         return true;
                                     }
@@ -1455,9 +1519,11 @@
                     parameters: {},
                     onSuccess: function(res) {
                         if (res && Array.isArray(res.launchPoints)) {
+                            state.installed = {};
                             res.launchPoints.forEach(function(lp) {
                                 var appId = lp.appId || lp.id;
                                 if (!appId) return;
+                                state.installed[appId] = true;
                                 var exists = arrFind(state.catalog, function(c) { return c.id === appId; });
                                 var iconUrl = launchPointIcon(lp);
                                 if (exists && iconUrl) exists.iconUrl = iconUrl;
@@ -1466,9 +1532,9 @@
                                     state.catalog.push({
                                         id: appId,
                                         title: lp.title || lp.id,
-                                        tag: 'Installed App',
-                                        desc: lp.appDescription || ('Launch ' + (lp.title || lp.id) + ' natively on your LG TV.'),
-                                        color: lp.iconColor || '#0a84ff',
+                                        tag: 'App instalado',
+                                        desc: lp.appDescription || ('Abrir ' + (lp.title || lp.id) + ' na TV.'),
+                                        color: lp.iconColor || '#1fc77e',
                                         badge: (lp.title || 'APP').substring(0, 3).toUpperCase(),
                                         iconUrl: iconUrl,
                                         bg: 'linear-gradient(135deg, ' + (lp.iconColor || '#2a344a') + ', #101420)'
@@ -1476,10 +1542,17 @@
                                 }
                             });
                             renderAppsShelf();
+                            // Provider -> app matching depends on what is installed.
+                            fetchTrendingPicks();
                         }
                     }
                 });
             } catch (e) {}
+        }
+
+        // Before discovery (or in a desktop preview) every catalog app counts as available.
+        function isInstalled(app) {
+            return !state.installed || isAlwaysAvailable(app) || !!state.installed[app.id];
         }
 
         // --- Native webOS App Launch ---
@@ -1491,7 +1564,7 @@
             var app = arrFind(state.catalog, function(item) { return item.id === appId; });
             var title = app ? (devicePreset(app, state.hdmiDevices).title || app.title) : appId;
             if (!window.webOS || !window.webOS.service || typeof window.webOS.service.request !== 'function') {
-                showToast('Open ' + title + ' on your LG TV. Launching is unavailable in this preview.', 5000);
+                showToast('Abra ' + title + ' na TV LG. Esta prévia não abre apps.', 5000);
                 return;
             }
             var request = { timer: null };
@@ -1508,9 +1581,9 @@
             function failure(error) {
                 var detail = error && error.errorText || '';
                 if (/not installed|not found|does not exist|unknown app/i.test(detail)) {
-                    finish(title + ' is not installed or is unavailable on this TV.');
+                    finish(title + ' não está instalado nesta TV.');
                 } else {
-                    finish('Could not open ' + title + '. Check that it is installed, then try again.');
+                    finish('Não foi possível abrir ' + title + '. Confira se está instalado e tente de novo.');
                 }
             }
             function fallback(originalError) {
@@ -1526,17 +1599,17 @@
                             if (pendingLaunch !== request) return;
                             var reply = null;
                             try { reply = JSON.parse(result && result.stdout || ''); } catch (e) {}
-                            if (reply && reply.returnValue === true) finish('Opening ' + title + '…');
+                            if (reply && reply.returnValue === true) finish('Abrindo ' + title + '…');
                             else if (reply && reply.returnValue === false) failure(reply);
-                            else finish('Could not confirm ' + title + ' opened. Please try again.');
+                            else finish('Não deu para confirmar se ' + title + ' abriu. Tente de novo.');
                         },
                         onFailure: function() { failure(originalError); }
                     });
                 } catch (e) { failure(originalError); }
             }
-            showToast('Opening ' + title + '…', 8000);
+            showToast('Abrindo ' + title + '…', 8000);
             request.timer = setTimeout(function() {
-                finish('No response opening ' + title + '. Please try again.');
+                finish('Sem resposta ao abrir ' + title + '. Tente de novo.');
             }, 8000);
             try {
                 webOS.service.request('luna://com.webos.applicationManager', {
@@ -1545,7 +1618,7 @@
                     onSuccess: function(result) {
                         if (pendingLaunch !== request) return;
                         if (result && result.returnValue === false) fallback(result);
-                        else finish('Opening ' + title + '…');
+                        else finish('Abrindo ' + title + '…');
                     },
                     onFailure: fallback
                 });
@@ -1571,13 +1644,13 @@
                 btn.dataset.id = app.id;
                 btn.dataset.tag = app.tag;
                 btn.dataset.title = title;
-                btn.dataset.desc = device.title ? 'Play ' + device.title + ' on ' + app.title + '.' : app.desc;
+                btn.dataset.desc = device.title ? 'Jogar no ' + device.title + ' pela ' + app.title + '.' : app.desc;
                 btn.setAttribute('aria-label', title + (device.title ? ' — ' + app.title : ''));
                 btn.dataset.color = app.color;
 
                 var iconDiv = document.createElement('div');
                 iconDiv.className = 'app-icon';
-                iconDiv.style.background = app.bg || 'linear-gradient(135deg, #0a84ff, #0040a0)';
+                iconDiv.style.background = app.bg || 'linear-gradient(135deg, #1fc77e, #0b5e3a)';
                 if (isHDMI(app)) {
                     iconDiv.style.background = device.color;
                     if (device.logo) {
@@ -1615,7 +1688,7 @@
                 grid.appendChild(btn);
             });
 
-            document.getElementById('shelfCountHint').textContent = shelfEdit ? (movingTileId ? '← / → Move • OK Place • Back Cancel' : 'Select a tile • OK Pick up • Done to save') : favItems.length + ' Apps • Instant Launch';
+            document.getElementById('shelfCountHint').textContent = shelfEdit ? (movingTileId ? '← / → mover • OK soltar • VOLTAR cancela' : 'Escolha um app • OK pega • Concluir salva') : favItems.length + ' apps';
             refreshMainNavList();
         }
 
@@ -1630,13 +1703,22 @@
                 card.dataset.tag = pick.badge;
                 card.dataset.title = pick.title;
                 card.dataset.desc = pick.desc;
-                card.dataset.color = pick.color || '#0a84ff';
+                card.dataset.color = pick.color || '#1fc77e';
 
                 var poster = document.createElement('div');
                 poster.className = 'pick-poster';
                 // Poster URLs come from third-party APIs, so only plain https URLs may enter the CSS url().
                 if (pick.poster && /^https:\/\/[^\s"'()\\]+$/.test(pick.poster)) {
                     poster.style.backgroundImage = "url('" + pick.poster + "')";
+                } else if (pick.app && APP_LOGOS[pick.app]) {
+                    // Shortcut cards (no TMDB key) show the service's bundled logo instead.
+                    var pickApp = arrFind(state.catalog, function(c) { return c.id === pick.app; });
+                    poster.style.background = (pickApp && pickApp.bg) || pick.color || '#1fc77e';
+                    var logoImg = document.createElement('img');
+                    logoImg.className = 'pick-logo';
+                    logoImg.alt = '';
+                    logoImg.src = 'assets/brands/' + APP_LOGOS[pick.app] + '.svg';
+                    poster.appendChild(logoImg);
                 }
 
                 // Pick text comes from TMDB/TVMaze (TVMaze is community-edited), so it is set as text, never HTML.
@@ -1653,7 +1735,10 @@
                 card.appendChild(meta);
 
                 card.addEventListener('mouseenter', function() { setMainFocus(card); });
-                card.addEventListener('click', function() { launchApp(pick.app); });
+                card.addEventListener('click', function() {
+                    if (pick.app) launchApp(pick.app);
+                    else showToast(pick.service, 4000);
+                });
                 grid.appendChild(card);
             });
 
@@ -1665,7 +1750,7 @@
             if (tile) setMainFocus(tile);
         }
         function moveShelfTile(direction) {
-            if (!shelfEdit || !movingTileId) { showToast('Select a tile first'); return; }
+            if (!shelfEdit || !movingTileId) { showToast('Escolha um app primeiro'); return; }
             var index = shelfEdit.indexOf(movingTileId);
             var destination = index + direction;
             if (index < 0 || destination < 0 || destination >= shelfEdit.length) return;
@@ -1678,7 +1763,7 @@
             if (!shelfEdit) return;
             if (save) {
                 try { localStorage.setItem('fmtv_favorites', JSON.stringify(shelfEdit)); }
-                catch (e) { showToast('Could not save the order. Please try again.', 5000); return; }
+                catch (e) { showToast('Não foi possível salvar a ordem. Tente de novo.', 5000); return; }
                 state.favorites = shelfEdit.slice();
             }
             shelfEdit = null;
@@ -1687,7 +1772,7 @@
             document.getElementById('shelfEditActions').hidden = true;
             renderAppsShelf();
             setMainFocus(document.getElementById('reorderShelfBtn'));
-            showToast(save ? 'Tile order saved' : 'Reordering cancelled');
+            showToast(save ? 'Ordem salva' : 'Reordenação cancelada');
         }
         document.getElementById('reorderShelfBtn').addEventListener('click', function() {
             shelfEdit = state.favorites.slice();
@@ -1735,11 +1820,11 @@
             item.focus({ preventScroll: true });
             curIndex = mainNavItems.indexOf(item);
 
-            heroTag.textContent = item.dataset.tag || 'Selection';
+            heroTag.textContent = item.dataset.tag || 'Seleção';
             heroTitle.textContent = item.dataset.title || '';
             heroDesc.textContent = item.dataset.desc || '';
 
-            var color = item.dataset.color || '#0a84ff';
+            var color = item.dataset.color || '#1fc77e';
             ambientGlow.style.background = 'radial-gradient(circle, ' + color + '35 0%, rgba(0,0,0,0) 70%)';
         }
 
@@ -1810,7 +1895,7 @@
                 button.className = 'app-toggle-item modal-nav';
                 function updateLabel() {
                     button.textContent = app.title + ': ' + (devicePreset(app, tempDevices).title || 'HDMI');
-                    button.setAttribute('aria-label', button.textContent + '. Press to change device');
+                    button.setAttribute('aria-label', button.textContent + '. OK para trocar o aparelho');
                 }
                 updateLabel();
                 button.addEventListener('click', function() {
@@ -1834,7 +1919,7 @@
             var container = document.getElementById('appSelectorGrid');
             container.innerHTML = '';
 
-            state.catalog.forEach(function(app) {
+            state.catalog.filter(isInstalled).forEach(function(app) {
                 var isSelected = tempFavorites.indexOf(app.id) !== -1;
                 var item = document.createElement('div');
                 item.className = 'app-toggle-item modal-nav' + (isSelected ? ' selected' : '');
@@ -1853,7 +1938,7 @@
                     } else if (tempFavorites.length < 8) {
                         tempFavorites.push(app.id);
                     } else {
-                        showToast('Max 8 apps on shelf');
+                        showToast('Máximo de 8 apps na prateleira');
                     }
                     renderAppSelectorGrid();
                     refreshModalNavList();
@@ -1920,7 +2005,7 @@
             var hourlyEl = document.getElementById('drawerHourly');
             hourlyEl.innerHTML = '';
             state.hourlyForecast.forEach(function(h) {
-                var wmo = WMO_CODES[h.code] || ['⛅', 'Fair'];
+                var wmo = WMO_CODES[h.code] || ['⛅', 'Tempo firme'];
                 var chip = document.createElement('div');
                 chip.className = 'drawer-hour-chip';
                 chip.innerHTML =
@@ -2001,7 +2086,7 @@
             document.getElementById('cfgTmdbKey').value = '';
             renderAppSelectorGrid();
             refreshModalNavList();
-            showToast('Defaults restored');
+            showToast('Padrão restaurado');
         });
 
         document.getElementById('saveModalBtn').addEventListener('click', function() {
@@ -2022,7 +2107,7 @@
             fetchWeather();
             fetchTrendingPicks();
             closeSettingsModal();
-            showToast('Saved & Applied!');
+            showToast('Salvo!');
         });
 
         // --- Remote Control Key Handler ---

@@ -49,14 +49,15 @@ Bloqueie anúncios e rastreamento na sua rede, sem mexer na TV.
 pip install cryptography
 python tools/tvlivre.py pair --ip <IP> --passphrase <PASSPHRASE>
 python launcher/scripts/build.py
-python tools/tvlivre.py install launcher/dist/io.github.fernandofasolo.tvlivre_0.1.0_all.ipk
+python tools/tvlivre.py install launcher/dist/io.github.fernandofasolo.tvlivre_<versão>_all.ipk
 ```
 
-5. No launcher, abra **⚙️ Customize**:
+5. No launcher, abra **⚙️ Personalizar**:
    - Escreva sua **cidade** (para o clima).
    - Escolha até 8 apps.
    - Nomeie as portas HDMI.
-   - Se a TV for OLED, use o tema **Pure OLED Black**.
+   - Se a TV for OLED, use o tema **Preto total**.
+   - **Onde assistir:** crie uma conta grátis em https://www.themoviedb.org, gere a chave em *Configurações → API* e cole em **Chave da API do TMDB**. A fileira "Em alta" passa a mostrar os filmes e séries da semana, **em qual streaming estão no Brasil**, priorizando os que você assina. O OK abre o app certo.
 6. Atalho: dentro do launcher, **segure o botão `1`** do controle e associe o TV Livre a ele.
 
 ### Não deixe o Modo Desenvolvedor expirar

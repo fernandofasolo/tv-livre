@@ -34,7 +34,7 @@ pip install cryptography
 python tools/tvlivre.py discover
 python tools/tvlivre.py pair --ip 192.168.0.50
 python launcher/scripts/build.py
-python tools/tvlivre.py install launcher/dist/io.github.fernandofasolo.tvlivre_0.1.0_all.ipk
+python tools/tvlivre.py install launcher/dist/io.github.fernandofasolo.tvlivre_<versão>_all.ipk
 python tools/tvlivre.py schedule-renew      # Windows: renova o Dev Mode toda segunda
 ```
 
