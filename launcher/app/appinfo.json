@@ -1,0 +1,20 @@
+{
+  "id": "io.github.fernandofasolo.tvlivre",
+  "version": "0.1.0",
+  "vendor": "TV Livre",
+  "type": "web",
+  "main": "index.html",
+  "title": "TV Livre",
+  "icon": "assets/icon.png",
+  "largeIcon": "assets/largeIcon.png",
+  "splashBackground": "assets/splash.png",
+  "iconColor": "#0a84ff",
+  "resolution": "1920x1080",
+  "handlesRelaunch": false,
+  "supportQuickStart": true,
+  "requiredPermissions": [
+    "applications",
+    "applications.launcher",
+    "system.notifications"
+  ]
+}

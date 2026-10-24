@@ -1,0 +1,11 @@
+! Title: TV Livre - LG TV aggressive (opt-in)
+! Description: LG platform/update domains. EXPECT BREAKAGE: LG Content Store, app updates
+!              and firmware updates may stop working. Use only if you know why you want this
+!              (e.g. keeping a rootable firmware from being auto-updated).
+! Format: Adblock-style (AdGuard Home, Pi-hole v6+, NextDNS). ||domain^ also blocks subdomains.
+! Homepage: https://github.com/fernandofasolo/tv-livre
+! License: MIT
+! Status: v0.1 - entries need validation against real DNS logs.
+||nextlgsdp.com^
+||lgtvsdp.com^
+||snu.lge.com^

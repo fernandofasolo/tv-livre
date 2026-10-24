@@ -1,0 +1,14 @@
+! Title: TV Livre - LG TV tracking and ACR
+! Description: Telemetry and Automatic Content Recognition (ACR) domains seen on LG Smart TVs.
+! Format: Adblock-style (AdGuard Home, Pi-hole v6+, NextDNS). ||domain^ also blocks subdomains.
+! Homepage: https://github.com/fernandofasolo/tv-livre
+! License: MIT
+! Status: v0.1 - entries need validation against real DNS logs. Report breakage via issues.
+! Note: blocking lgthinq.com also breaks control of the TV from the LG ThinQ phone app.
+||lgtvcommon.com^
+||lgtviot.com^
+||lgthinq.com^
+||aic-ngfts.lge.com^
+||ngfts.lge.com^
+||alphonso.tv^
+||samba.tv^

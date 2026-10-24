@@ -1,0 +1,10 @@
+! Title: TV Livre - LG TV ads
+! Description: Advertising domains used by LG Smart TVs (webOS). Safe tier: should not break apps.
+! Format: Adblock-style (AdGuard Home, Pi-hole v6+, NextDNS). ||domain^ also blocks subdomains.
+! Homepage: https://github.com/fernandofasolo/tv-livre
+! License: MIT
+! Status: v0.1 - entries need validation against real DNS logs. Report breakage via issues.
+||lgsmartad.com^
+||ad.lgappstv.com^
+||lgad.cjpowercast.com^
+||yumenetworks.com^

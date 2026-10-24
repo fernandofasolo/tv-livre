@@ -1,0 +1,8 @@
+launcher/dist/
+__pycache__/
+*.pyc
+.tvlivre.json
+*_rsa
+*_rsa_decrypted
+.DS_Store
+Thumbs.db
