@@ -107,8 +107,11 @@ def cmd_pair(args):
     os.makedirs(SSH_DIR, exist_ok=True)
     url = f"http://{args.ip}:9991/webos_rsa"
     print(f"[*] Downloading key from {url} (Key Server must be ON)...")
-    with urllib.request.urlopen(url, timeout=5) as resp:
-        key_data = resp.read()
+    try:
+        with urllib.request.urlopen(url, timeout=5) as resp:
+            key_data = resp.read()
+    except OSError as e:
+        sys.exit(f"[!] Could not reach the Key Server ({e}). Turn 'Key Server' ON in the Developer Mode app.")
     write_private(RAW_KEY, key_data)
     key = serialization.load_pem_private_key(key_data, password=passphrase.encode())
     write_private(DEC_KEY, key.private_bytes(
