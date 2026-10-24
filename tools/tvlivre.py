@@ -65,9 +65,12 @@ def write_private(path, data):
 
 
 def ssh(ip, remote_cmd, tty=False):
-    args = ["ssh", *(["-tt"] if tty else []), *SSH_OPTS, "-p", SSH_PORT, "-i", DEC_KEY,
-            f"prisoner@{ip}", remote_cmd]
-    return subprocess.run(args, capture_output=True, text=True)
+    base = [*SSH_OPTS, "-p", SSH_PORT, "-i", DEC_KEY, f"prisoner@{ip}", remote_cmd]
+    res = subprocess.run(["ssh", *(["-tt"] if tty else []), *base], capture_output=True, text=True)
+    # Some TVs' sshd refuses forced PTY allocation; retry without it.
+    if tty and "PTY allocation request failed" in (res.stderr or ""):
+        res = subprocess.run(["ssh", *base], capture_output=True, text=True)
+    return res
 
 
 def cmd_discover(args):
@@ -128,20 +131,27 @@ def cmd_install(args):
     ip = resolve_ip(args)
     if not os.path.isfile(args.ipk):
         sys.exit(f"[!] File not found: {args.ipk}")
-    remote = "/media/developer/temp/tvlivre-upload.ipk"
+    # Keep the original file name: appInstallService expects <id>_<version>_<arch>.ipk.
+    remote = f"/media/developer/temp/{os.path.basename(args.ipk)}"
     print(f"[*] Uploading {os.path.basename(args.ipk)} to {ip}...")
     res = subprocess.run(["scp", *SSH_OPTS, "-P", SSH_PORT, "-i", DEC_KEY, args.ipk, f"prisoner@{ip}:{remote}"])
     if res.returncode != 0:
         sys.exit("[!] Upload failed.")
-    payload = json.dumps({"id": "tvlivre.install", "ipkUrl": remote, "subscribe": True})
-    # luna-send-pub needs a TTY to print anything; dev/install streams many
-    # progress replies, and the session stays open after the last one.
-    res = ssh(ip, f"timeout 60 luna-send-pub -n 30 luna://com.webos.appInstallService/dev/install '{payload}'", tty=True)
-    if '"state":"installed"' in res.stdout:
+    payload = json.dumps({"id": "com.ares.defaultName", "ipkUrl": remote, "subscribe": True})
+    # Same call ares-install makes. Without a TTY, luna-send-pub block-buffers
+    # stdout and only flushes when it exits; in interactive mode it never exits
+    # on its own, so let it run, then SIGINT it to get every reply at once.
+    print(f"[*] Installing (waiting {args.wait}s for the TV)...")
+    res = ssh(ip, f"/usr/bin/luna-send-pub -i luna://com.webos.appInstallService/dev/install '{payload}' & "
+                  f"P=$!; sleep {args.wait}; kill -INT $P; wait $P")
+    ssh(ip, f"rm -f '{remote}'")
+    states = [json.loads(l).get("details", {}).get("state") for l in res.stdout.splitlines()
+              if l.startswith("{") and '"details"' in l]
+    if "installed" in states:
         print("[+] Installed.")
     else:
-        print("[!] Install did not reach the 'installed' state:")
-        print(res.stdout or res.stderr or "(no output)")
+        print(f"[!] Install did not reach the 'installed' state. States seen: {states or '(none)'}")
+        print("    Large packages may need more time: --wait 90")
         sys.exit(1)
 
 
@@ -190,6 +200,7 @@ def main():
     sp = sub.add_parser("install")
     sp.add_argument("ipk")
     sp.add_argument("--ip")
+    sp.add_argument("--wait", type=int, default=20, help="seconds to let the TV install (default 20)")
     sp.set_defaults(func=cmd_install)
     for name, func in (("devmode-status", cmd_devmode_status),
                        ("devmode-renew", cmd_devmode_renew),
