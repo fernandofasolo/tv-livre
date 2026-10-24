@@ -58,7 +58,8 @@ python tools/tvlivre.py install launcher/dist/io.github.fernandofasolo.tvlivre_<
    - Nomeie as portas HDMI.
    - Se a TV for OLED, use o tema **Preto total**.
    - **Onde assistir:** crie uma conta grátis em https://www.themoviedb.org, gere a chave em *Configurações → API* e cole em **Chave da API do TMDB**. A fileira "Em alta" passa a mostrar os filmes e séries da semana, **em qual streaming estão no Brasil**, priorizando os que você assina. O OK abre o app certo.
-6. Atalho: dentro do launcher, **segure o botão `1`** do controle e associe o TV Livre a ele.
+6. **Na primeira abertura, a TV mostra um aviso pedindo permissão para o TV Livre: aceite.** Ele só lê a lista de apps instalados, porque no webOS 22+ apps de desenvolvedor não têm outro jeito de saber o que está instalado. Se recusar, o seletor mostra o catálogo inteiro. Para ver o aviso de novo, use **Restaurar padrão** em Personalizar.
+7. Atalho: dentro do launcher, **segure o botão `1`** do controle e associe o TV Livre a ele.
 
 ### Não deixe o Modo Desenvolvedor expirar
 

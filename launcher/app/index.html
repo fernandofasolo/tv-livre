@@ -1098,7 +1098,7 @@
         // here are matched by name against the apps discovered on the TV.
         var PROVIDER_APPS = {
             8: 'netflix', 1796: 'netflix',
-            9: 'amazon', 119: 'amazon', 10: 'amazon',
+            9: 'amazon', 119: 'amazon', 10: 'amazon', 2100: 'amazon',
             337: 'com.disney.disneyplus-prod',
             307: 'globoplaywebos',
             283: 'com.crunchyroll.webapp',
@@ -1511,6 +1511,11 @@
         }
 
         // --- Discover Installed Apps from LG webOS ---
+        // Launch points never offered on the shelf: this app, the Dev Mode app and LG promo apps.
+        var HIDDEN_APPS = /^(io\.github\.fernandofasolo\.tvlivre|com\.palmdts\.devmode|webos\.day)$/;
+        var SSAP_KEY = 'tvlivre_ssap_key';
+        var SSAP_DECLINED = 'tvlivre_ssap_declined';
+
         function discoverTVApps() {
             if (!window.webOS || !window.webOS.service) return;
             try {
@@ -1518,36 +1523,76 @@
                     method: "listLaunchPoints",
                     parameters: {},
                     onSuccess: function(res) {
-                        if (res && Array.isArray(res.launchPoints)) {
-                            state.installed = {};
-                            res.launchPoints.forEach(function(lp) {
-                                var appId = lp.appId || lp.id;
-                                if (!appId) return;
-                                state.installed[appId] = true;
-                                var exists = arrFind(state.catalog, function(c) { return c.id === appId; });
-                                var iconUrl = launchPointIcon(lp);
-                                if (exists && iconUrl) exists.iconUrl = iconUrl;
-                                if (lp.systemApp && !exists) return;
-                                if (!exists) {
-                                    state.catalog.push({
-                                        id: appId,
-                                        title: lp.title || lp.id,
-                                        tag: 'App instalado',
-                                        desc: lp.appDescription || ('Abrir ' + (lp.title || lp.id) + ' na TV.'),
-                                        color: lp.iconColor || '#1fc77e',
-                                        badge: (lp.title || 'APP').substring(0, 3).toUpperCase(),
-                                        iconUrl: iconUrl,
-                                        bg: 'linear-gradient(135deg, ' + (lp.iconColor || '#2a344a') + ', #101420)'
-                                    });
-                                }
-                            });
-                            renderAppsShelf();
-                            // Provider -> app matching depends on what is installed.
-                            fetchTrendingPicks();
-                        }
-                    }
+                        if (res && Array.isArray(res.launchPoints)) applyLaunchPoints(res.launchPoints);
+                    },
+                    // webOS 22+ reserves listLaunchPoints for LG's own apps; Dev Mode apps get "Denied".
+                    onFailure: discoverViaSsap
                 });
-            } catch (e) {}
+            } catch (e) { discoverViaSsap(); }
+        }
+
+        // Fallback: the TV's own remote-control API (SSAP) on localhost, the same one phone
+        // remotes and Home Assistant use. First use shows a one-time "allow" prompt on the TV;
+        // the client key it returns is kept in localStorage so later boots are silent.
+        function discoverViaSsap() {
+            var key = localStorage.getItem(SSAP_KEY);
+            if (!key && localStorage.getItem(SSAP_DECLINED)) return;
+            if (typeof WebSocket !== 'function') return;
+            var ws;
+            try { ws = new WebSocket('ws://127.0.0.1:3000'); } catch (e) { return; }
+            var timer = setTimeout(function() { ws.close(); }, 60000);
+            var payload = { forcePairing: false, pairingType: 'PROMPT', manifest: { manifestVersion: 1, appVersion: '1.0', permissions: ['READ_INSTALLED_APPS'] } };
+            if (key) payload['client-key'] = key;
+            ws.onopen = function() {
+                if (!key) showToast('Aceite o aviso na TV para o TV Livre ver seus apps instalados.', 10000);
+                ws.send(JSON.stringify({ type: 'register', id: 'reg', payload: payload }));
+            };
+            ws.onmessage = function(msg) {
+                var data;
+                try { data = JSON.parse(msg.data); } catch (e) { return; }
+                if (data.type === 'registered') {
+                    if (data.payload && data.payload['client-key']) localStorage.setItem(SSAP_KEY, data.payload['client-key']);
+                    ws.send(JSON.stringify({ type: 'request', id: 'apps', uri: 'ssap://com.webos.applicationManager/listLaunchPoints' }));
+                } else if (data.id === 'apps') {
+                    clearTimeout(timer);
+                    ws.close();
+                    if (data.payload && Array.isArray(data.payload.launchPoints)) applyLaunchPoints(data.payload.launchPoints);
+                } else if (data.type === 'error' && data.id === 'reg') {
+                    clearTimeout(timer);
+                    ws.close();
+                    // A stale key is dropped so the next boot can pair again; a declined prompt is remembered.
+                    if (key) localStorage.removeItem(SSAP_KEY);
+                    else localStorage.setItem(SSAP_DECLINED, '1');
+                }
+            };
+        }
+
+        function applyLaunchPoints(launchPoints) {
+            state.installed = {};
+            launchPoints.forEach(function(lp) {
+                var appId = lp.appId || lp.id;
+                if (!appId || HIDDEN_APPS.test(appId)) return;
+                state.installed[appId] = true;
+                var exists = arrFind(state.catalog, function(c) { return c.id === appId; });
+                var iconUrl = launchPointIcon(lp);
+                if (exists && iconUrl) exists.iconUrl = iconUrl;
+                if (lp.systemApp && !exists) return;
+                if (!exists) {
+                    state.catalog.push({
+                        id: appId,
+                        title: lp.title || lp.id,
+                        tag: 'App instalado',
+                        desc: lp.appDescription || ('Abrir ' + (lp.title || lp.id) + ' na TV.'),
+                        color: lp.iconColor || '#1fc77e',
+                        badge: (lp.title || 'APP').substring(0, 3).toUpperCase(),
+                        iconUrl: iconUrl,
+                        bg: 'linear-gradient(135deg, ' + (lp.iconColor || '#2a344a') + ', #101420)'
+                    });
+                }
+            });
+            renderAppsShelf();
+            // Provider -> app matching depends on what is installed.
+            fetchTrendingPicks();
         }
 
         // Before discovery (or in a desktop preview) every catalog app counts as available.
@@ -2080,6 +2125,8 @@
         document.getElementById('resetDefaultBtn').addEventListener('click', function() {
             tempFavorites = DEFAULT_FAVORITES.slice();
             tempDevices = {};
+            // Lets a previously declined TV pairing prompt be offered again on next start.
+            localStorage.removeItem(SSAP_DECLINED);
             renderHDMIOptions();
             document.getElementById('cfgCity').value = '';
             document.getElementById('cfgTheme').value = 'auto';

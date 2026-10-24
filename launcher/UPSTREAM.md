@@ -18,4 +18,5 @@ This launcher is a fork of **Free My TV (for LG webOS)** by Daniel Moreira and c
 | **v0.2** App selector lists only apps installed on the TV | Less clutter |
 | **v0.2** "Where to watch": TMDB trending (`pt-BR`) + watch providers for region `BR`, titles on the user's own apps first; card opens the right app | Main new feature |
 | **v0.2** Without a TMDB key: shortcut cards to each service instead of hard-coded (and partly wrong) picks | Honesty |
+| **v0.2.1** Installed-app discovery via the TV's local remote-control API (SSAP `ws://127.0.0.1:3000`, one-time on-screen prompt, permission `READ_INSTALLED_APPS` only) when `listLaunchPoints` is denied — it is reserved for LG's own apps on webOS 22+ | Upstream's discovery silently fails on modern TVs |
 | **v0.2** Own identity: green accent `#1fc77e`, new icon/splash (`scripts/make_assets.py`) | Branding |

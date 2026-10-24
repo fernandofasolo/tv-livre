@@ -44,9 +44,9 @@ Ou baixe o `.ipk` pronto na página de [Releases](../../releases). Ele é gerado
 
 `v0.1`: em construção.
 
-| Modelo testado | webOS | Firmware | `pair` | `install` | `devmode-status` / `renew` | Root |
-|---|---|---|---|---|---|---|
-| 55UQ8050PSB | 22 | 04.60.90 | ✅ | ✅ | ✅ | ❌ firmware corrigido |
+| Modelo testado | webOS | Firmware | `pair` | `install` | `devmode-status` / `renew` | Apps instalados | Onde assistir | Root |
+|---|---|---|---|---|---|---|---|---|
+| 55UQ8050PSB | 22 | 04.60.90 | ✅ | ✅ | ✅ | ✅ (via SSAP) | ✅ | ❌ firmware corrigido |
 
 As listas de bloqueio e a renovação do Dev Mode precisam de validação em mais modelos. Abra uma issue com o modelo da TV, a versão do webOS e o que funcionou ou quebrou.
 
