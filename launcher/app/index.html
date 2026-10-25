@@ -287,14 +287,17 @@
             flex-wrap: wrap;
             display: grid;
             grid-template-columns: repeat(8, 1fr);
-            gap: 18px;
+            gap: 16px 18px;
         }
 
         .app-tile {
             background: rgba(255, 255, 255, 0.05);
             border: 1.5px solid rgba(255, 255, 255, 0.1);
             border-radius: 22px;
-            aspect-ratio: 1 / 1;
+            /* Fixed height, not aspect-ratio: webOS 22 ships Chromium 87, which
+               ignores aspect-ratio and squashed tiles to ~204x98. 138px keeps
+               three full rows (SHELF_MAX) on a 1080p screen with the picks row. */
+            height: 138px;
             flex: 0 0 calc((100% - 18px * 7) / 8);
             display: flex;
             flex-direction: column;
@@ -942,7 +945,7 @@
             </div>
 
             <div>
-                <div class="modal-section-title">1. Apps da prateleira (OK para marcar, até 8)</div>
+                <div class="modal-section-title">1. Apps da prateleira (OK para marcar, até 24)</div>
                 <div class="app-selector-grid" id="appSelectorGrid"></div>
 
             </div>
@@ -1671,6 +1674,9 @@
         }
 
         // --- Render App Shelf & Trending Row ---
+        // Up to three rows of 8 tiles; the big screen fits them with the picks row.
+        var SHELF_MAX = 24;
+
         function renderAppsShelf() {
             var grid = document.getElementById('appsGrid');
             grid.innerHTML = '';
@@ -1678,7 +1684,7 @@
             var favItems = (shelfEdit || state.favorites)
                 .map(function(id) { return arrFind(state.catalog, function(c) { return c.id === id; }); })
                 .filter(Boolean)
-                .slice(0, 8);
+                .slice(0, SHELF_MAX);
 
             favItems.forEach(function(app) {
                 var device = devicePreset(app, state.hdmiDevices);
@@ -1980,10 +1986,10 @@
                     var idx = tempFavorites.indexOf(app.id);
                     if (idx !== -1) {
                         if (tempFavorites.length > 1) tempFavorites.splice(idx, 1);
-                    } else if (tempFavorites.length < 8) {
+                    } else if (tempFavorites.length < SHELF_MAX) {
                         tempFavorites.push(app.id);
                     } else {
-                        showToast('Máximo de 8 apps na prateleira');
+                        showToast('Máximo de ' + SHELF_MAX + ' apps na prateleira');
                     }
                     renderAppSelectorGrid();
                     refreshModalNavList();

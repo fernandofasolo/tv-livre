@@ -54,7 +54,7 @@ python tools/tvlivre.py install launcher/dist/io.github.fernandofasolo.tvlivre_<
 
 5. No launcher, abra **⚙️ Personalizar**:
    - Escreva sua **cidade** (para o clima).
-   - Escolha até 8 apps.
+   - Escolha até 24 apps (3 linhas de 8).
    - Nomeie as portas HDMI.
    - Se a TV for OLED, use o tema **Preto total**.
    - **Onde assistir:** crie uma conta grátis em https://www.themoviedb.org, gere a chave em *Configurações → API* e cole em **Chave da API do TMDB**. A fileira "Em alta" passa a mostrar os filmes e séries da semana, **em qual streaming estão no Brasil**, priorizando os que você assina. O OK abre o app certo.
